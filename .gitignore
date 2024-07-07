@@ -2,3 +2,4 @@
 *.add
 *.spl
 lazy-lock.json
+gdb-opts.txt
