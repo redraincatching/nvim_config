@@ -54,6 +54,29 @@ keymap("n", "<leader>jl", ":+tabnext", {desc = "move to next tab"})
 -- move to hex view & enable syntax highlighting
 keymap("n", "<leader>hx", ":%!xxd<CR>:set ft=xxd<CR>", {desc = "view as hex"})
 
+-- Y to yank to eol
+keymap("n", "Y", "y$", {desc = "yank to eol"})
+
+-- center screen when jumping
+keymap("n", "n", "nzzzv", {desc = "next search result (centered)"})
+keymap("n", "N", "Nzzzv", {desc = "previous search result (centered)"})
+keymap("n", "<C-d>", "<C-d>zz", {desc = "half page down (centered)"})
+keymap("n", "<C-u>", "<C-u>zz", {desc = "half page up (centered)"})
+
+-- better j behavior
+keymap("n", "J", "mzJ`z", {desc = "join lines and keep cursor position"})
+
+-- resize split windows
+-- can get fucky when treeview is open
+keymap("n", "<C-Up>", ":resize +2<CR>", {desc = "increase window height"})
+keymap("n", "<C-Down>", ":resize -2<CR>", {desc = "decrease window height"})
+keymap("n", "<C-Left>", ":vertical resize -2<CR>", {desc = "decrease window width"})
+keymap("n", "<C-Right>", ":vertical resize +2<CR>", {desc = "increase window width"})
+
+-- quick file navigation
+keymap("n", "<leader>e", ":Explore<CR>", {desc = "open file explorer"})
+keymap("n", "<leader>fi", ":find ", {desc = "find file"})
+
 
 ---------------------
 -- PLUGIN KEYBINDS --

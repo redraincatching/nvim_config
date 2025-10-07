@@ -17,8 +17,6 @@ require('lazy').setup({
 	{ 'nvim-tree/nvim-web-devicons' },
 	-- color scheme
 	{ 'edeneast/nightfox.nvim' },
-	-- filetree
-	{ 'nvim-tree/nvim-tree.lua' },
 	-- autopair brackets
 	{ 'windwp/nvim-autopairs' },
 	-- commenting
@@ -33,10 +31,6 @@ require('lazy').setup({
     { 'folke/trouble.nvim' },
 	-- lsp tools
 	{ 'neovim/nvim-lspconfig' },
-	{ 'hrsh7th/nvim-cmp' },
-	{ 'hrsh7th/cmp-nvim-lsp' },
-	{ 'hrsh7th/cmp-buffer' },
-	{ 'hrsh7th/cmp-path' },
 	{
 		'L3MON4D3/luasnip',
 		version = 'v2.*'
@@ -61,11 +55,8 @@ require('lazy').setup({
     { 'folke/which-key.nvim' },
     -- mason
     { 'williamboman/mason.nvim' },
-    -- riscv highlighting
-    {
-        "henry-hsieh/riscv-asm-vim",
-        ft = { "riscv_asm" }
-    },
+    -- mason lspconfig
+    { 'mason-org/mason-lspconfig.nvim' },
     -- vimtex
     {
         "lervag/vimtex",
@@ -89,5 +80,21 @@ require('lazy').setup({
                 TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
               },
         }
+    },
+    -- perforce integration
+    {
+        "motiongorilla/p4nvim"
+    },
+    -- filetree, replacing nvim-tree as it has a memory leak in powershell, and ranger isn't available
+    -- look into swapping to oil.nvim
+    {
+          "nvim-neo-tree/neo-tree.nvim",
+          branch = "v3.x",
+          dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons",
+            "MunifTanjim/nui.nvim",
+          },
+          lazy = false
     }
 })

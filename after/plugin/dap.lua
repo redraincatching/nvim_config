@@ -24,6 +24,7 @@ vim.keymap.set('n', '<Leader>ds', function()
 end, {desc = "dap scopes"})
 
 -- this setup comes from https://github.com/SteelPh0enix/NeovimConfig/, minus the python parts
+-- see also https://codeberg.org/mfussenegger/nvim-dap/wiki/C-C---Rust-(gdb-via--vscode-cpptools)
 -- Download the latest release from https://github.com/microsoft/vscode-cpptools/releases
 -- and unzip it to proper directory.
 
@@ -49,17 +50,28 @@ end
 -- more docs: https://github.com/mfussenegger/nvim-dap/wiki/C-C---Rust-(gdb-via--vscode-cpptools)
 
 dap.configurations.cpp = {
-    {
-        name = 'Debug file',
-        type = 'cppdbg',
-        request = 'launch',
-
-        program = function()
-            return vim.fn.input('Path to exec: ', vim.fn.getcwd() .. '/', 'file')
-        end,
-        cwd = '${workspaceFolder}',
-        stopAtEntry = true,
-    },
+  {
+    name = "launch file",
+    type = "cppdbg",
+    request = "launch",
+    program = function()
+      return vim.fn.input('path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopAtEntry = true,
+  },
+  {
+    name = 'attach to gdbserver :1234',
+    type = 'cppdbg',
+    request = 'launch',
+    MIMode = 'gdb',
+    miDebuggerServerAddress = 'localhost:1234',
+    miDebuggerPath = '/usr/bin/gdb',
+    cwd = '${workspaceFolder}',
+    program = function()
+      return vim.fn.input('path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+  },
 }
 
 dap.configurations.c = dap.configurations.cpp

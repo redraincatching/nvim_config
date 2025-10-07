@@ -1,5 +1,5 @@
 if vim.loop.os_uname().sysname == "Windows_NT" then
-	require("redraincatching.powershell")
+	require("redraincatching.core.powershell")
 end
 
 require("redraincatching.config.keymappings")

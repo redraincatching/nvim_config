@@ -1,94 +1,55 @@
-local lspconfig = require("lspconfig")
-local luasnip = require("luasnip")
-lspconfig.clangd.setup{
-	cmd = {
-			"clangd",
-			"--log=verbose",
-            "--pch-storage=memory",
-            "--clang-tidy",
-            "--suggest-missing-includes",
-            "--compile-commands-dir=/home/eidhne/cc_wsl/"
-	},
-	filetypes = {"h", "hpp", "c", "cpp", "objc", "objcpp"},
+-- this currently doesn't work in a separate file
+vim.lsp.config.clangd = {
+    cmd = { 
+        'clangd', 
+        '--background-index', 
+        '--log=verbose',
+        '--pch-storage=memory',
+        '--compile-commands-dir=D:\\builds\\cm-systest\\build-l64'
+    },
+    filetypes = { 'c', 'cpp' },
 }
 
--- clangd
-local cmp = require("cmp")
-local select_opts = { behavior = cmp.SelectBehavior.Select }
+-- enable lsp servers
+vim.lsp.enable({'clangd', 'rust_analyzer'})
 
-cmp.setup({
-	snippet = {
-		expand = function(args)
-			luasnip.lsp_expand(args.body)
-		end,
-	},
-
-	sources = {
-		{ name = 'path' },
-		{ name = 'nvim_lsp' },
-		{ name = 'buffer', keyword_length = 3 },
-		{ name = 'luasnip', keyword_length = 3 },
-	},
-
-	mapping = cmp.mapping.preset.insert({
-      ["<C-k>"] = cmp.mapping.select_prev_item(),
-      ["<C-j>"] = cmp.mapping.select_next_item(),
-      ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-      ["<C-f>"] = cmp.mapping.scroll_docs(4),
-      ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestion
-      ["<C-e>"] = cmp.mapping.abort(), -- close completion window
-      ["<Tab>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    }),
-
-	window = {
-		documentation = cmp.config.window.bordered()
-	},
-
-	formatting = {
-		fields = {'menu', 'abbr', 'kind'},
-		format = function(entry, item) 
-			local menu_icon = {
-				nvim_lsp = '[LSP]',
-				lusanip = '[SNIP]',
-				buffer = '[BUF]',
-				path = '[PATH]'
-			}
-
-			item.menu = menu_icon[entry.source.name]
-			return item
-			end
-		}
+-- autocomplete
+-- set up an lsp autoattach command to enable features based on client capabilities
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(ev)
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        if client:supports_method('textDocument/completion') then
+            vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+        end
+    end
 })
 
-local sign = function(opts)
-  vim.fn.sign_define(opts.name, {
+-- rounded borders
+vim.opt.winborder = "rounded"
 
-    texthl = opts.name,
-    text = opts.text,
-    numhl = ''
-  })
-end
-
-sign({name = 'DiagnosticSignError', text = 'X'})
-sign({name = 'DiagnosticSignWarn', text = ''})
-sign({name = 'DiagnosticSignHint', text = ''})
-sign({name = 'DiagnosticSignInfo', text = ''})
-
-vim.diagnostic.config({
+-- diagnostics
+vim.diagnostic.config({ 
     virtual_text = false,
+    virtual_lines = {
+        current_line = true
+    },
     signs = true,
     update_in_insert = true,
     underline = true,
     severity_sort = false,
+    virtual_text = false,
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = "",
+            [vim.diagnostic.severity.WARN] = "",
+            [vim.diagnostic.severity.INFO] = "󰋼",
+            [vim.diagnostic.severity.HINT] = "󰌵",
+        },
+    },
     float = {
-        border = 'rounded',
-        source = 'always',
-        header = '',
-        prefix = '',
+        border = "rounded",
+        format = function(d)
+            return ("%s (%s) [%s]"):format(d.message, d.source, d.code or d.user_data.lsp.code)
+        end,
     },
 })
-
-vim.cmd([[
-set signcolumn=yes
-autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
-]])

@@ -13,6 +13,8 @@ dashboard.setup({
     config = {
         header = {
         '                                                                                ',
+        '                                                                                ',
+        '                                                                                ',
         '                                       ██████ ██                                ',
         '                                   ███████                                      ',
         '                               ██████                                           ',
@@ -65,7 +67,7 @@ dashboard.setup({
             { key = "n", icon = icons.ui.NewFile, desc = " new file", action = "ene | startinsert" },
             { key = "r", icon = icons.ui.Files, desc = " recent files", action = telescope.oldfiles },
             { key = "f", icon = icons.ui.FindFile, desc = "  find file ", action = telescope.find_files },
-            { key = "e", icon = icons.ui.Files, desc = " file explorer", action = "NvimTreeToggle"},
+            { key = "e", icon = icons.ui.Files, desc = " file explorer", action = "Neotree"},
             { key = "t", icon = icons.ui.Text, desc = " find text", action = telescope.live_grep },
             { key = "h", icon = icons.ui.Check, desc = "  check health", action = "checkhealth"},
             { key = "l", icon = icons.ui.Event, desc =  " lazy", action = "Lazy" },
