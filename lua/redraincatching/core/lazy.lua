@@ -35,6 +35,11 @@ require('lazy').setup({
 		'L3MON4D3/luasnip',
 		version = 'v2.*'
 	},
+    -- autocompletion
+    { 
+        'saghen/blink.cmp',
+        version = '1.*'
+    },
     -- rust analyzer configuration
     {
         'mrcjkb/rustaceanvim',
