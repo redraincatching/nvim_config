@@ -101,5 +101,9 @@ require('lazy').setup({
             "MunifTanjim/nui.nvim",
           },
           lazy = false
+    },
+    -- daily notes
+    {
+        "VVoruganti/today.nvim"
     }
 })
