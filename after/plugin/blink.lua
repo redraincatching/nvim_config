@@ -9,7 +9,7 @@ blink.setup({
 				score_offset = 4,
 			},
 			lsp = {
-				min_keyword_length = 3,
+				min_keyword_length = 1,
 				score_offset = 3,
 			},
 			path = {
@@ -17,7 +17,7 @@ blink.setup({
 				score_offset = 2,
 			},
 			snippets = {
-				min_keyword_length = 5,
+				min_keyword_length = 4,
 				score_offset = 1,
 			},
         }

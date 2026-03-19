@@ -6,7 +6,8 @@ require('lazy').setup({
 	-- telescope fuzzy finder
 	{
 		'nvim-telescope/telescope.nvim', 
-		branch = '0.1.x'
+		branch = '0.1.x',
+        dependencies = { 'BurntSushi/ripgrep' },
 	},
 	-- treesitter
 	{
@@ -85,10 +86,6 @@ require('lazy').setup({
                 TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
               },
         }
-    },
-    -- perforce integration
-    {
-        "motiongorilla/p4nvim"
     },
     -- filetree, replacing nvim-tree as it has a memory leak in powershell, and ranger isn't available
     -- look into swapping to oil.nvim
