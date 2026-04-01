@@ -102,5 +102,9 @@ require('lazy').setup({
     -- daily notes
     {
         "VVoruganti/today.nvim"
+    },
+    -- git stuff
+    {
+        "tpope/vim-fugitive"
     }
 })

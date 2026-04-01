@@ -5,7 +5,7 @@ vim.lsp.config.clangd = {
         '--background-index', 
         '--log=verbose',
         '--pch-storage=memory',
-        '--compile-commands-dir=D:\\ion\\cm-ion\\build-l64'
+        '--compile-commands-dir=D:\\builds\\cm-ion\\build-l64'
     },
     filetypes = { 'c', 'cpp' },
 }
