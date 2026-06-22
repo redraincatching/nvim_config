@@ -50,6 +50,14 @@ require('lazy').setup({
             refreshSupport = false
         }
     },
+    -- csharp
+    {
+        "seblyng/roslyn.nvim",
+        ---@module 'roslyn.config'
+        ---@type RoslynNvimConfig
+        opts = {
+        },
+    },
 	-- dashboard
 	{ 
         'nvimdev/dashboard-nvim',
@@ -88,7 +96,6 @@ require('lazy').setup({
         }
     },
     -- filetree, replacing nvim-tree as it has a memory leak in powershell, and ranger isn't available
-    -- look into swapping to oil.nvim
     {
           "nvim-neo-tree/neo-tree.nvim",
           branch = "v3.x",
@@ -103,8 +110,12 @@ require('lazy').setup({
     {
         "VVoruganti/today.nvim"
     },
-    -- git stuff
+    -- substitue/exchange operator
     {
-        "tpope/vim-fugitive"
-    }
+        "gbprod/substitute.nvim"
+    },
+    -- git stuff
+    { "tpope/vim-fugitive" },
+    { "lewis6991/gitsigns.nvim" },
+    { "sindrets/diffview.nvim" }
 })

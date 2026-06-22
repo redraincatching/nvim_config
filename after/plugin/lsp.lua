@@ -10,8 +10,29 @@ vim.lsp.config.clangd = {
     filetypes = { 'c', 'cpp' },
 }
 
+-- this is also weird
+vim.lsp.config("roslyn", {
+    settings = {
+        ["csharp|inlay_hints"] = {
+            csharp_enable_inlay_hints_for_implicit_object_creation = true,
+            csharp_enable_inlay_hints_for_implicit_variable_types = true
+        },
+        ["csharp|code_lens"] = {
+            dotnet_enable_references_code_lens = true
+        },
+        ["csharp|background_analysis"] = {
+            dotnet_analyzer_diagnostics_scope = "openFiles",
+            dotnet_compiler_diagnostics_scope = "fullSolution"
+        },
+        ["csharp|formatting"] = {
+            dotnet_organize_imports_on_format = true
+        }
+    }
+})
+
+
 -- enable lsp servers
-vim.lsp.enable({'clangd', 'rust_analyzer'})
+vim.lsp.enable({'clangd', 'rust_analyzer', 'roslyn'})
 
 -- autocomplete
 -- set up an lsp autoattach command to enable features based on client capabilities
@@ -53,3 +74,5 @@ vim.diagnostic.config({
         end,
     },
 })
+
+-- note: code actions and other commands are under gr*
