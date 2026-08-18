@@ -43,13 +43,13 @@ keymap("n", "<ESC>", ":nohlsearch<Bar>:echo<CR>")
 keymap("n", "<leader>te", ":bo term<CR>:resize 20<CR>", {desc = "open terminal"})
 
 -- tab keymappings
-keymap("n", "<leader>jn", ":tabnew", {desc = "open new tab"})
-keymap("n", "<leader>jc", ":tab split", {desc = "open current buffer in new tab"})
-keymap("n", "<leader>jq", ":tabclose", {desc = "close the current tab"})
-keymap("n", "<leader>jo", ":tabonly", {desc = "close all other tabs"})
+keymap("n", "<leader>jn", ":tabnew<CR>", {desc = "open new tab"})
+keymap("n", "<leader>jc", ":tab split<CR>", {desc = "open current buffer in new tab"})
+keymap("n", "<leader>jq", ":tabclose<CR>", {desc = "close the current tab"})
+keymap("n", "<leader>jo", ":tabonly<CR>", {desc = "close all other tabs"})
 
-keymap("n", "<leader>jh", ":-tabnext", {desc = "move to previous tab"})
-keymap("n", "<leader>jl", ":+tabnext", {desc = "move to next tab"})
+keymap("n", "<C-h>", ":-tabnext<CR>", {desc = "move to previous tab"})
+keymap("n", "<C-l>", ":+tabnext<CR>", {desc = "move to next tab"})
 
 -- move to hex view & enable syntax highlighting
 keymap("n", "<leader>hx", ":%!xxd<CR>:set ft=xxd<CR>", {desc = "view as hex"})
